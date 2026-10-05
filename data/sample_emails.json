@@ -1,0 +1,12 @@
+[
+  {"sender": "Sarah Khan <sarah@acmecorp.com>", "subject": "URGENT: Client demo moved to tomorrow 10am",
+   "body": "Hi,\n\nThe client just asked to move the demo to tomorrow at 10am. Can you confirm you're available and send the updated slide deck by 6pm today?\n\nThanks,\nSarah"},
+  {"sender": "Mom <mom@family.com>", "subject": "Sunday lunch?",
+   "body": "Hi beta, are you coming for lunch this Sunday? Your aunt is visiting too. Let me know so I can plan the food!"},
+  {"sender": "Deals <offers@megastore.com>", "subject": "FLASH SALE: 70% off everything!!!",
+   "body": "Only 3 hours left! Click here to claim your exclusive discount. Unsubscribe at the bottom."},
+  {"sender": "Ali Raza <ali@vendor.io>", "subject": "Invoice #4821 - payment overdue",
+   "body": "Hello,\n\nInvoice #4821 for $2,300 was due on 28 September and is still unpaid. Please confirm when we can expect payment or let us know if there is an issue.\n\nRegards,\nAli"},
+  {"sender": "Tech Weekly <news@techweekly.com>", "subject": "This week in AI: 5 stories you missed",
+   "body": "Welcome to this week's digest. Story 1: new open-source models. Story 2: GPU shortages ease. Read more on our site."}
+]
