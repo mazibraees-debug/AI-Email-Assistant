@@ -7,9 +7,20 @@ from assistant.extractor import clean_body
 class FakeLLM:
     def complete(self, system, user, max_tokens=1000):
         if "triage engine" in system:
-            return '```json\n' + json.dumps({
-                "category": "Work", "priority": 5, "priority_reason": "Deadline today",
-                "summary": "Demo moved.", "action_items": ["Send deck"], "needs_reply": True}) + '\n```'
+            return (
+                "```json\n"
+                + json.dumps(
+                    {
+                        "category": "Work",
+                        "priority": 5,
+                        "priority_reason": "Deadline today",
+                        "summary": "Demo moved.",
+                        "action_items": ["Send deck"],
+                        "needs_reply": True,
+                    }
+                )
+                + "\n```"
+            )
         return "Hi Sarah, confirmed.\n\nBest,\nTester"
 
 
@@ -39,5 +50,6 @@ def test_bad_llm_output_does_not_crash():
     class Bad(FakeLLM):
         def complete(self, *a, **k):
             return "not json"
+
     a = EmailAssistant(llm=Bad()).analyze(from_text("a", "s", "b"))
     assert a.priority == 3

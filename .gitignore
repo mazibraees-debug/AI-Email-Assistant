@@ -13,10 +13,23 @@ __pycache__/
 # Virtual environments
 venv/
 .venv/
+vemv/
+.vemv/
 env/
 ENV/
+*env*/
 env.bak/
 venv.bak/
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+*.sqlite3
+
+# Logs
+logs/
+*.log
 
 # Testing and coverage
 .pytest_cache/

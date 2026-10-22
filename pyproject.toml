@@ -1,0 +1,91 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-email-assistant"
+version = "1.0.0"
+description = "Production-grade AI email triage, drafting and inbox-intelligence assistant with guardrails, evaluation, persistence, REST API and a human-in-the-loop UI."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "AI Email Assistant" }]
+keywords = ["ai", "email", "triage", "llm", "guardrails", "evaluation", "fastapi", "streamlit"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "openai>=1.0.0",
+    "anthropic>=0.40.0",
+    "streamlit>=1.35.0",
+    "python-dotenv>=1.0.0",
+    "fastapi>=0.111.0",
+    "uvicorn[standard]>=0.29.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "apscheduler>=3.10.0",
+    "scikit-learn>=1.0.0",
+    "numpy>=1.26.0",
+    "httpx>=0.27.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-asyncio>=1.0.0",
+    "pytest-mock>=3.0.0",
+    "ruff>=0.8.0",
+    "mypy>=1.0.0",
+    "types-requests>=2.0.0",
+]
+eval = [
+    "pytest>=8.0.0",
+]
+
+[project.scripts]
+ai-email-assistant = "cli:main"
+
+[tool.setuptools]
+packages = ["assistant", "api", "worker", "scripts"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 110
+src = ["."]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "C4", "RET", "PTH", "S"]
+ignore = ["S101", "S105", "S106", "S107", "S307", "S310", "S603", "S607", "S608", "S609", "S701"]
+
+[tool.ruff.format]
+
+[tool.ruff.lint.isort]
+known-first-party = ["assistant", "api", "worker", "scripts"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101", "S311"]
+"scripts/*" = ["S101"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_ignores = true
+ignore_missing_imports = true
+disallow_untyped_defs = false
+plugins = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = [
+    "integration: tests requiring network or external services",
+    "slow: tests taking more than a few seconds",
+]
+filterwarnings = [
+    "ignore::pytest.PytestDeprecationWarning",
+]

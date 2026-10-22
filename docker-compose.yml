@@ -1,0 +1,35 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - DATABASE_PATH=/app/data/assistant.db
+      - PORT=8000
+    volumes:
+      - assistant-data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  worker:
+    build: .
+    env_file:
+      - .env
+    environment:
+      - DATABASE_PATH=/app/data/assistant.db
+    volumes:
+      - assistant-data:/app/data
+    command: ["python", "-m", "worker.scheduler", "--daemon"]
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  assistant-data:
